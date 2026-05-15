@@ -11,25 +11,10 @@ import { localePath } from "@/lib/routes";
 const defaultOgImage = "/assets/logo.png";
 
 export function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.kvbplus.com").replace(
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.kvbpro.com").replace(
     /\/$/,
     "",
   );
-}
-
-/** Resolve site origin from the incoming request (for sitemap, etc.) */
-export function getSiteUrlFromRequest(request: Request): string {
-  const host =
-    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim() ??
-    request.headers.get("host");
-  if (!host) return getSiteUrl();
-
-  const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
-  const proto =
-    forwardedProto ??
-    (host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https");
-
-  return `${proto}://${host}`.replace(/\/$/, "");
 }
 
 /** Normalize to a path suffix without locale, e.g. "" or "/products/forex" */
