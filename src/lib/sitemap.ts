@@ -1,0 +1,87 @@
+import type { MetadataRoute } from "next";
+import { getAllPageParams, getPagePath } from "@/data/navigation";
+import { defaultLocale } from "@/i18n/config";
+import { localePath } from "@/lib/routes";
+import { buildAbsoluteLanguageAlternates } from "@/lib/seo";
+
+const staticPaths = ["", "/professional"];
+
+function sitemapEntry(
+  siteUrl: string,
+  pathSuffix: string,
+  options: { changeFrequency: "weekly" | "monthly"; priority: number },
+): MetadataRoute.Sitemap[number] {
+  return {
+    url: `${siteUrl}${localePath(defaultLocale, pathSuffix || "/")}`,
+    lastModified: new Date(),
+    changeFrequency: options.changeFrequency,
+    priority: options.priority,
+    alternates: {
+      languages: buildAbsoluteLanguageAlternates(pathSuffix, siteUrl),
+    },
+  };
+}
+
+export function getSitemap(siteUrl: string): MetadataRoute.Sitemap {
+  const pageParams = getAllPageParams();
+
+  const staticEntries = staticPaths.map((path) =>
+    sitemapEntry(siteUrl, path, {
+      changeFrequency: "weekly",
+      priority: path === "" ? 1 : 0.9,
+    }),
+  );
+
+  const pageEntries = pageParams.map(({ category, slug }) =>
+    sitemapEntry(siteUrl, getPagePath(category, slug), {
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }),
+  );
+
+  return [...staticEntries, ...pageEntries];
+}
+
+export function serializeSitemap(data: MetadataRoute.Sitemap): string {
+  const hasAlternates = data.some(
+    (item) => Object.keys(item.alternates?.languages ?? {}).length > 0,
+  );
+
+  let xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+  if (hasAlternates) {
+    xml += ' xmlns:xhtml="http://www.w3.org/1999/xhtml"';
+  }
+  xml += ">\n";
+
+  for (const item of data) {
+    xml += "<url>\n";
+    xml += `<loc>${item.url}</loc>\n`;
+
+    const languages = item.alternates?.languages;
+    if (languages) {
+      for (const [language, href] of Object.entries(languages)) {
+        xml += `<xhtml:link rel="alternate" hreflang="${language}" href="${href}" />\n`;
+      }
+    }
+
+    if (item.lastModified) {
+      const lastmod =
+        item.lastModified instanceof Date
+          ? item.lastModified.toISOString()
+          : item.lastModified;
+      xml += `<lastmod>${lastmod}</lastmod>\n`;
+    }
+    if (item.changeFrequency) {
+      xml += `<changefreq>${item.changeFrequency}</changefreq>\n`;
+    }
+    if (typeof item.priority === "number") {
+      xml += `<priority>${item.priority}</priority>\n`;
+    }
+    xml += "</url>\n";
+  }
+
+  xml += "</urlset>\n";
+  return xml;
+}

@@ -17,6 +17,21 @@ export function getSiteUrl() {
   );
 }
 
+/** Resolve site origin from the incoming request (for sitemap, etc.) */
+export function getSiteUrlFromRequest(request: Request): string {
+  const host =
+    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim() ??
+    request.headers.get("host");
+  if (!host) return getSiteUrl();
+
+  const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  const proto =
+    forwardedProto ??
+    (host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https");
+
+  return `${proto}://${host}`.replace(/\/$/, "");
+}
+
 /** Normalize to a path suffix without locale, e.g. "" or "/products/forex" */
 export function normalizePathSuffix(path?: string): string {
   if (!path || path === "/") return "";
@@ -37,8 +52,11 @@ export function buildLanguageAlternates(pathSuffix?: string): Record<string, str
 }
 
 /** Absolute URLs for sitemap.xml hreflang entries */
-export function buildAbsoluteLanguageAlternates(pathSuffix?: string): Record<string, string> {
-  const base = getSiteUrl();
+export function buildAbsoluteLanguageAlternates(
+  pathSuffix?: string,
+  siteUrl?: string,
+): Record<string, string> {
+  const base = siteUrl ?? getSiteUrl();
   const relative = buildLanguageAlternates(pathSuffix);
   return Object.fromEntries(
     Object.entries(relative).map(([lang, path]) => [lang, `${base}${path}`]),
