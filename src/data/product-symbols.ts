@@ -1,0 +1,27 @@
+export const PRODUCT_SYMBOLS: Record<string, readonly string[]> = {
+  forex: ["EURUSD", "GBPUSD", "AUDUSD", "NZDUSD", "USDJPY", "USDCAD", "USDCHF"],
+  commodities: ["XAUUSD", "XAGUSD", "USOIL", "UKOIL"],
+  indices: [
+    "NAS100",
+    "SPX500",
+    "ChinaA50",
+    "NIKKEI",
+    "CHINA300",
+    "FTSE100",
+    "DOW",
+    "DAX",
+    "HSI",
+    "USDX",
+  ],
+  shares: ["#GOOG", "#NVDA", "#ADS", "#CLX", "#LMT", "#NKE", "#VZ"],
+  cryptocurrencies: [
+    "BTCUSD",
+    "ETHUSD",
+    "LTCUSD",
+    "SOLUSD",
+    "BNBUSD",
+    "DOTUSD",
+    "BCHUSD",
+    "AVAXUSD",
+  ],
+};

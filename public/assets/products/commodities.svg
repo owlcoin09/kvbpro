@@ -1,0 +1,7 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Commodities">
+  <circle cx="24" cy="24" r="22" fill="#E8EBF0"/>
+  <path d="M16 30V22l8-6 8 6v8H16z" fill="#0E1F3D"/>
+  <path d="M20 30v-5l4-3 4 3v5" fill="#2A3F5C"/>
+  <rect x="14" y="30" width="20" height="3" rx="1" fill="#4A5D73"/>
+  <path d="M24 10l2 4h-4l2-4z" fill="#C9A227"/>
+</svg>
