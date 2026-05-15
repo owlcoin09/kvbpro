@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "next build",
     "dev": "next dev",
     "generate:sitemap": "tsx scripts/generate-sitemap.ts",
     "prebuild": "pnpm generate:sitemap",
-    "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "assets": "bash scripts/download-assets.sh"
+    "assets": "bash scripts/download-assets.sh",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -17,6 +21,7 @@
     "@mui/icons-material": "^9.0.1",
     "@mui/material": "^9.0.1",
     "@mui/material-nextjs": "^9.0.1",
+    "@opennextjs/cloudflare": "^1.19.10",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -30,6 +35,7 @@
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
     "tsx": "^4.19.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.91.0"
   }
 }
