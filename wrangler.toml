@@ -1,0 +1,8 @@
+# Static export (next.config output: "export") → deploy `out/` as Workers assets.
+# Do not use OpenNext / next-on-pages; no `main` worker script required.
+name = "kvbpro"
+compatibility_date = "2026-05-15"
+
+[assets]
+directory = "./out"
+not_found_handling = "404-page"

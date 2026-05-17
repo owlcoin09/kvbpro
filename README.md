@@ -32,12 +32,24 @@ pnpm build
 pnpm start   # 本地预览 out/ 目录
 ```
 
-### Cloudflare Pages
+### Cloudflare（静态站点）
+
+本项目是 **静态导出**，产物在 `out/`。请二选一部署，**不要**用 Next.js SSR / OpenNext（否则会找 `.next/standalone/.../pages-manifest.json` 并报错）。
+
+#### Workers（Git 连仓库，`wrangler deploy`）
+
+仓库已包含 `wrangler.toml`，将 `out/` 作为 **Static Assets** 发布（无 Node SSR）。
+
+- **Build command**: `npm run build`（或 `pnpm build`）
+- **Deploy command**: `npx wrangler deploy`
+- **不要**在 Dashboard 里选 Next.js / OpenNext 模板；`nodejs_compat` 可保留，无影响
+- 推送 `wrangler.toml` 后重新部署
+
+#### Cloudflare Pages（可选）
 
 - **Build command**: `pnpm build`
 - **Build output directory**: `out`
-- **Framework preset**: None（静态站点）
-- 勿使用 `@cloudflare/next-on-pages` 等 Workers SSR 方案
+- **Framework preset**: None 或 Next.js (Static HTML Export)
 
 根路径 `/` 及无语言前缀的路径会通过 `_redirects` 302 到默认语言 `/en`（构建时自动生成）。
 

@@ -10,6 +10,7 @@
     "postbuild": "tsx scripts/post-export.ts",
     "start": "npx --yes serve@14 out -p 3000",
     "lint": "eslint",
+    "deploy": "wrangler deploy",
     "assets": "bash scripts/download-assets.sh"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
     "tsx": "^4.19.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.24.4"
   }
 }
