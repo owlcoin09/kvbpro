@@ -18,7 +18,6 @@
 /out/
 /public/sitemap.xml
 /public/robots.txt
-/public/_redirects
 
 # production
 /build

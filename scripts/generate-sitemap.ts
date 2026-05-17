@@ -1,11 +1,7 @@
-import { writeFileSync } from "node:fs";
+import { existsSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { getSiteUrl } from "@/lib/seo";
-import {
-  getLocaleFallbackRedirects,
-  getSitemap,
-  serializeSitemap,
-} from "@/lib/sitemap";
+import { getSitemap, serializeSitemap } from "@/lib/sitemap";
 
 const siteUrl = getSiteUrl();
 const publicDir = join(process.cwd(), "public");
@@ -23,5 +19,7 @@ writeFileSync(
 console.log(`Generated ${robotsPath}`);
 
 const redirectsPath = join(publicDir, "_redirects");
-writeFileSync(redirectsPath, getLocaleFallbackRedirects(), "utf-8");
-console.log(`Generated ${redirectsPath}`);
+if (existsSync(redirectsPath)) {
+  unlinkSync(redirectsPath);
+  console.log(`Removed ${redirectsPath}`);
+}

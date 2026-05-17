@@ -51,7 +51,7 @@ pnpm start   # 本地预览 out/ 目录
 - **Build output directory**: `out`
 - **Framework preset**: None 或 Next.js (Static HTML Export)
 
-根路径 `/` 及无语言前缀的路径会通过 `_redirects` 302 到默认语言 `/en`（构建时自动生成）。
+根路径 `/` 及无语言前缀路径（如 `/products/forex`）由 `postbuild` 将英文静态页镜像到 `out/`，**不使用任何 302 重定向**。
 
 ## 项目结构
 
