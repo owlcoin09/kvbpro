@@ -24,10 +24,22 @@ npm run dev
 
 ## 构建
 
+项目使用 **静态导出**（`output: "export"`），构建产物在 `out/`，部署到 CDN / Cloudflare Pages 时**只需托管静态文件**，无需 Node SSR 或 Workers 跑 Next 运行时，可避免 CF 1102（CPU 超限）。
+
 ```bash
-npm run build
-npm start
+pnpm install
+pnpm build
+pnpm start   # 本地预览 out/ 目录
 ```
+
+### Cloudflare Pages
+
+- **Build command**: `pnpm build`
+- **Build output directory**: `out`
+- **Framework preset**: None（静态站点）
+- 勿使用 `@cloudflare/next-on-pages` 等 Workers SSR 方案
+
+根路径 `/` 及无语言前缀的路径会通过 `_redirects` 302 到默认语言 `/en`（构建时自动生成）。
 
 ## 项目结构
 

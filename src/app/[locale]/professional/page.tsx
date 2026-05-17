@@ -6,12 +6,16 @@ import ProServicesSection from "@/components/professional/ProServicesSection";
 import ProBenefitsSection from "@/components/professional/ProBenefitsSection";
 import ProRulesSection from "@/components/professional/ProRulesSection";
 import ProCtaSection from "@/components/professional/ProCtaSection";
-import { isLocale, type Locale } from "@/i18n/config";
+import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import PageStructuredData from "@/components/seo/PageStructuredData";
 import PageBreadcrumbs from "@/components/layout/PageBreadcrumbs";
 import { buildProfessionalBreadcrumbs } from "@/lib/structured-data";
 import { buildPageMetadata } from "@/lib/seo";
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
   params,

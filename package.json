@@ -7,7 +7,7 @@
     "generate:sitemap": "tsx scripts/generate-sitemap.ts",
     "prebuild": "pnpm generate:sitemap",
     "build": "next build",
-    "start": "next start",
+    "start": "npx --yes serve@14 out -p 3000",
     "lint": "eslint",
     "assets": "bash scripts/download-assets.sh"
   },
