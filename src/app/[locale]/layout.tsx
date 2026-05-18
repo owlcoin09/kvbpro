@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Roboto, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import ThemeRegistry from "@/components/providers/ThemeRegistry";
+import GoogleTag from "@/components/analytics/GoogleTag";
 import GlobalStructuredData from "@/components/seo/GlobalStructuredData";
 import { brand } from "@/theme/brand";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -79,6 +80,7 @@ export default async function LocaleLayout({
   return (
     <html lang={htmlLang[raw]} className={fontClass(raw)} suppressHydrationWarning>
       <body style={{ fontFamily: fontFamily(raw) }}>
+        <GoogleTag />
         <InitColorSchemeScript attribute="data" defaultMode="system" />
         <GlobalStructuredData dict={dict} locale={raw} />
         <ThemeRegistry>{children}</ThemeRegistry>
