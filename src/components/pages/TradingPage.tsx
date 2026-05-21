@@ -26,7 +26,7 @@ import type { NavCategory } from "@/data/navigation";
 import type { Locale } from "@/i18n/config";
 import type { PageContent } from "@/i18n/pages/types";
 import type { Dictionary } from "@/i18n/types";
-import { TRADING_PLATFORM_URL } from "@/config/urls";
+import TradingPlatformButton from "@/components/common/TradingPlatformButton";
 import { buildContentBreadcrumbs } from "@/lib/structured-data";
 import { pagePath } from "@/lib/routes";
 
@@ -399,16 +399,9 @@ export default function TradingPage({ page, dict, locale, category, slug }: Prop
             </Typography>
           ) : null}
 
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            href={TRADING_PLATFORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <TradingPlatformButton variant="contained" color="primary" size="large">
             {nav.openAccount}
-          </Button>
+          </TradingPlatformButton>
         </Container>
       </Box>
     </>

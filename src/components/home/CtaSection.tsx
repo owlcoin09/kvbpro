@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { TRADING_PLATFORM_URL } from "@/config/urls";
+import TradingPlatformButton from "@/components/common/TradingPlatformButton";
 import { brand } from "@/theme/brand";
 import { brandSurface } from "@/theme/surfaces";
 import type { Dictionary } from "@/i18n/types";
@@ -52,17 +52,14 @@ export default function CtaSection({ dict }: Props) {
         <Typography variant="body1" sx={{ mb: 4, opacity: 0.95 }}>
           {cta.description}
         </Typography>
-        <Button
+        <TradingPlatformButton
           variant="contained"
           size="large"
           color="secondary"
-          href={TRADING_PLATFORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
           sx={brandSurface.ctaContained}
         >
           {cta.button}
-        </Button>
+        </TradingPlatformButton>
       </Container>
     </Box>
   );

@@ -25,7 +25,8 @@ import ThemeModeToggle from "@/components/layout/ThemeModeToggle";
 import type { NavCategory } from "@/data/navigation";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
-import { TRADING_PLATFORM_URL } from "@/config/urls";
+import TradingPlatformButton from "@/components/common/TradingPlatformButton";
+import { useTradingPlatformUrl } from "@/components/providers/TradingPlatformUrlProvider";
 import { localePath, navChildPath, pagePath } from "@/lib/routes";
 
 type HeaderProps = {
@@ -39,6 +40,7 @@ type MenuAnchor = {
 };
 
 export default function Header({ dict, locale }: HeaderProps) {
+  const tradingPlatformUrl = useTradingPlatformUrl();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState<MenuAnchor | null>(null);
   const { nav } = dict;
@@ -121,15 +123,9 @@ export default function Header({ dict, locale }: HeaderProps) {
               >
                 {nav.contactUs}
               </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                href={TRADING_PLATFORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <TradingPlatformButton variant="contained" color="primary">
                 {nav.openAccount}
-              </Button>
+              </TradingPlatformButton>
             </Box>
 
             <Box sx={{ display: { lg: "none" }, ml: "auto", alignItems: "center", gap: 0.5 }}>
@@ -188,9 +184,10 @@ export default function Header({ dict, locale }: HeaderProps) {
             </ListItemButton>
             <ListItemButton
               component="a"
-              href={TRADING_PLATFORM_URL}
+              href={tradingPlatformUrl}
               target="_blank"
               rel="noopener noreferrer"
+              suppressHydrationWarning
               onClick={() => setDrawerOpen(false)}
             >
               <ListItemText primary={nav.openAccount} />

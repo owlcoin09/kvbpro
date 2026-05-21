@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { TRADING_PLATFORM_URL } from "@/config/urls";
+import TradingPlatformButton from "@/components/common/TradingPlatformButton";
 import { brandSurface } from "@/theme/surfaces";
 import { brand } from "@/theme/brand";
 import type { Dictionary } from "@/i18n/types";
@@ -78,12 +78,9 @@ export default function HeroSection({ dict }: Props) {
             >
               {hero.description}
             </Typography>
-            <Button
+            <TradingPlatformButton
               variant="contained"
               size="large"
-              href={TRADING_PLATFORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               sx={{
                 ...brandSurface.ctaContained,
                 px: 4,
@@ -92,7 +89,7 @@ export default function HeroSection({ dict }: Props) {
               }}
             >
               {hero.ctaPrimary}
-            </Button>
+            </TradingPlatformButton>
           </Box>
 
           <Box

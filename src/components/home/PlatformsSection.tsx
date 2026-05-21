@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { TRADING_PLATFORM_URL } from "@/config/urls";
+import TradingPlatformButton from "@/components/common/TradingPlatformButton";
 import { platformImages } from "@/data/media";
 import { brand } from "@/theme/brand";
 import type { Dictionary } from "@/i18n/types";
@@ -62,15 +62,9 @@ export default function PlatformsSection({ dict }: Props) {
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                     {platform.description}
                   </Typography>
-                  <Button
-                    variant="text"
-                    color="primary"
-                    href={TRADING_PLATFORM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <TradingPlatformButton variant="text" color="primary">
                     {tools.learnMore}
-                  </Button>
+                  </TradingPlatformButton>
                 </Box>
                 <Box
                   sx={{

@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { TRADING_PLATFORM_URL } from "@/config/urls";
+import TradingPlatformButton from "@/components/common/TradingPlatformButton";
 import { brandSurface } from "@/theme/surfaces";
 import type { Dictionary } from "@/i18n/types";
 
@@ -34,26 +34,20 @@ export default function ProCtaSection({ dict }: Props) {
           spacing={2}
           sx={{ justifyContent: "center" }}
         >
-          <Button
+          <TradingPlatformButton
             variant="contained"
             size="large"
-            href={TRADING_PLATFORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             sx={brandSurface.ctaContained}
           >
             {cta.primary}
-          </Button>
-          <Button
+          </TradingPlatformButton>
+          <TradingPlatformButton
             variant="outlined"
             size="large"
-            href={TRADING_PLATFORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             sx={brandSurface.ctaOutlined}
           >
             {cta.secondary}
-          </Button>
+          </TradingPlatformButton>
         </Stack>
       </Container>
     </Box>
