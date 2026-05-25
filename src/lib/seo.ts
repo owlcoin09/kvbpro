@@ -11,7 +11,7 @@ import { localePath } from "@/lib/routes";
 const defaultOgImage = "/assets/logo.png";
 
 export function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.kvbpro.com").replace(
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(
     /\/$/,
     "",
   );
