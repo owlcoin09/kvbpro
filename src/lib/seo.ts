@@ -10,11 +10,9 @@ import { localePath } from "@/lib/routes";
 
 const defaultOgImage = "/assets/logo.png";
 
+/** Build-time canonical origin; empty when unset (multi-domain static deploy). */
 export function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(
-    /\/$/,
-    "",
-  );
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/\/$/, "");
 }
 
 /** Normalize to a path suffix without locale, e.g. "" or "/products/forex" */
@@ -102,8 +100,10 @@ export function buildRootMetadata(dict: SiteMetaDict, locale: Locale): Metadata 
   const canonical = localePath(locale, "/");
   const otherLocales = locales.filter((l) => l !== locale);
 
+  const siteUrl = getSiteUrl();
+
   return {
-    metadataBase: new URL(getSiteUrl()),
+    ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
     title: {
       default: dict.title,
       template: `%s | ${dict.name}`,

@@ -13,7 +13,7 @@ console.log(`Generated ${sitemapPath}`);
 const robotsPath = join(publicDir, "robots.txt");
 writeFileSync(
   robotsPath,
-  `User-agent: *\nAllow: /\n\nHost: ${siteUrl}\nSitemap: ${siteUrl}/sitemap.xml\n`,
+  "User-agent: *\nAllow: /\n\nSitemap: /sitemap.xml\n",
   "utf-8",
 );
 console.log(`Generated ${robotsPath}`);
